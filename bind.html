@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+
+        var user = {
+            firstName: "Вася",
+            sayHi: function(swearing) {
+                var type = typeof swearing;
+                var swear = (type == 'string') ? swearing : '';
+                alert( this.firstName + swear );
+            }
+        };
+
+        // привязка контекста с помощью функции bind
+        // результат bind - анонимная функция-обертка (*)
+        function bind(func, context) {
+            return function() { // (*)
+                return func.apply(context, arguments);
+            };
+        }
+        var a = bind(user.sayHi, user);
+        // a - это обёртка, фиксирующая контекст и передающая вызовы в func (user.sayHi)
+        a(' лох');
+
+        // привязка контекста с помощью метода bind
+        var b = user.sayHi.bind(user);
+        b();
+
+        // вызов с помощью apply (вызывает сразу)
+        user.sayHi.apply(user);
+
+        // смотрим тип переменной
+        alert( typeof user.sayHi );
+
+    </script>
+</body>
+</html>
