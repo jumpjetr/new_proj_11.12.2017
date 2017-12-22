@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        var user_1 = {
+            firstName: "Вася",
+            sayHi: function() {
+                alert( this.firstName );
+            }
+        };
+        var user_2 = {
+            firstName: "Петя",
+            sayHi: function() {
+                alert( this.firstName );
+            }
+        };
+
+        // за 1 секунду user_1 успевает присвоиться user_2
+        setTimeout(function() {
+            user_1.sayHi();
+        }, 1000);
+
+        // чтобы гарантировать вызов функции в правильном контексте, используем метод bind
+        setTimeout(user_1.sayHi.bind(user_1), 1000);
+
+        user_1 = user_2
+
+    </script>
+</body>
+</html>

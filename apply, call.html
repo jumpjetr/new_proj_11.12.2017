@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <script>
+        function Person(name, birthDate, gender) {
+            this.name = name;
+            this.birthDate = birthDate;
+            this.age = new Date().getFullYear() - this.birthDate;
+            this.showNameAndAge = function() {
+                alert( this.name + ': ' + this.age );
+            };
+            this.gender = gender;
+            this.organs = true;
+        }
+
+        function boss(firstProp, secondProp) {
+            alert( this[firstProp] + ': ' + this[secondProp] );
+        }
+
+        var person_1 = new Person('Маша', 1993, 'female');
+        var person_2 = new Person('Настя', 1992, 'female');
+
+        var arr_for_person = [
+            'name',
+            'age'
+        ];
+
+        // с помощью apply передаем аргументы в функцию boss с помощью массива
+        boss.apply(person_1, arr_for_person);
+        // с помощью call с помощью списка
+        boss.call(person_1, 'name', 'age');
+        // Вызываем ту же функцию через метод
+        person_1.showNameAndAge();
+
+
+    </script>
+
+</body>
+</html>
